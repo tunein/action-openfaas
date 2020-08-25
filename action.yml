@@ -1,0 +1,24 @@
+# action.yml
+name: 'OpenFaaS function builder'
+description: 'Build and deploy OpenFaaS functions and push image to ECR'
+inputs:
+  stack-file:
+    description: 'The OpenFaaS function definition file'
+    required: true
+  openfaas-username:
+    description: 'User for authenticating at OpenFaaS gateway'
+    required: true
+    default: 'admin'
+  openfaas-password:
+    description: 'Password for authenticating at OpenFaaS gateway'
+    required: true
+outputs:
+  time: # id of output
+    description: 'The time we greeted you'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.stack-file }}
+    - ${{ inputs.openfaas-username }}
+    - ${{ inputs.openfaas-password }}
