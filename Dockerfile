@@ -1,10 +1,8 @@
-ARG BUILDX_VERSION=19.03.5_0.3.1
-FROM jonoh/docker-buildx-qemu:${BUILDX_VERSION}
+FROM docker:19.03.12
 
-RUN apt-get update && apt-get install -y \
-        python \
-        python-pip && \
-    pip install --upgrade awscli==1.18.125
+RUN apk add curl python3 py3-pip git
+
+RUN pip3 install --upgrade awscli==1.18.125
 
 ARG FAAS_CLI_VERSION=0.12.8
 RUN curl -sLSf -o faas-cli https://github.com/openfaas/faas-cli/releases/download/${FAAS_CLI_VERSION}/faas-cli
@@ -14,4 +12,4 @@ RUN mv faas-cli /usr/local/bin/ && \
 
 COPY entrypoint.sh /entrypoint.sh
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["sh", "/entrypoint.sh"]

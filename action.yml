@@ -1,6 +1,9 @@
 # action.yml
 name: 'OpenFaaS function builder'
 description: 'Build and deploy OpenFaaS functions and push image to ECR'
+branding:
+  icon: upload-cloud
+  color: blue
 inputs:
   stack-file:
     description: 'The OpenFaaS function definition file'
@@ -12,9 +15,6 @@ inputs:
   openfaas-password:
     description: 'Password for authenticating at OpenFaaS gateway'
     required: true
-outputs:
-  time: # id of output
-    description: 'The time we greeted you'
 runs:
   using: 'docker'
   image: 'Dockerfile'
