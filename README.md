@@ -4,6 +4,10 @@ GitHub action for building OpenFaaS functions and deploying images to ECR.
 
 ## Inputs
 
+### `action`
+
+**Required** 	`build` or `deploy`
+
 ### `stack-file`
 
 **Required** 	The OpenFaaS function definition file.
@@ -16,17 +20,20 @@ GitHub action for building OpenFaaS functions and deploying images to ECR.
 
 **Required** Password for authenticating at OpenFaaS gateway
 
+### `template-url`
+
+URL of the repository with templates
+
 ## Example usage
 
 ```yaml
-uses: actions/actionn-openfaas-ecr@v1
+uses: tunein/action-openfaas@v*.*.*
 env:
   OPENFAAS_URL: ${{ secrets.OPENFAAS_GATEWAY }}
-  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-  AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
 with:
+  action:  'build'
   stack-file: './function.yml'
   openfaas-username: ${{ secrets.OPENFAAS_USERNAME }}
   openfaas-password: ${{ secrets.OPENFAAS_PASSWORD }}
+  template-url: 'https://github.com/serhiisavruk/openfaas-template'
 ```
