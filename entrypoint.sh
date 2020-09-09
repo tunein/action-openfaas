@@ -9,7 +9,7 @@ set -e
 # $5 Template repository URL
 
 build() {
-  echo "🌎puling custom OpenFaaS template ..."
+  echo "🌎building image of OpenFaaS function ..."
   faas-cli template pull $2
   BUILDING_MESSAGES_STRING=$(faas-cli build -f $1 | grep 'Image:')
   FULL_IMAGE_ARN=$(echo $BUILDING_MESSAGES_STRING | awk '{print $2}')
@@ -21,6 +21,7 @@ build() {
 deploy() {
   echo "🌎authorization to OpenFaaS ..."
   echo $3 | faas-cli login --username $2 --password-stdin
+  echo "🌎deploying function to OpenFaaS ..."
   faas-cli deploy -f $1
 }
 
