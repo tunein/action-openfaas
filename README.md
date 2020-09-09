@@ -1,6 +1,6 @@
-# OpenFaaS/ECR GitHub action
+# OpenFaaS GitHub action
 
-GitHub action for building OpenFaaS functions and deploying images to ECR.
+GitHub action for building OpenFaaS functions
 
 ## Inputs
 
