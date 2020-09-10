@@ -1,0 +1,39 @@
+# action.yml
+name: 'OpenFaaS function builder'
+description: 'Build and deploy OpenFaaS functions and push image to ECR'
+branding:
+  icon: upload-cloud
+  color: blue
+inputs:
+  action:
+    description: "'build' or 'deploy'"
+    required: true
+  stack-file:
+    description: 'The OpenFaaS function definition file'
+    required: true
+  openfaas-username:
+    description: 'User for authenticating at OpenFaaS gateway'
+    required: true
+    default: 'admin'
+  openfaas-password:
+    description: 'Password for authenticating at OpenFaaS gateway'
+    required: true
+  template-url:
+    description: "URL of the repository with custom template"
+    required: false
+outputs:
+  registry:
+    description: "Function image registry"
+  repository:
+    description: "Function image repository"
+  tag:
+    description: "Function image tag"
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.action }}
+    - ${{ inputs.stack-file }}
+    - ${{ inputs.openfaas-username }}
+    - ${{ inputs.openfaas-password }}
+    - ${{ inputs.template-url }}
