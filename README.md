@@ -24,6 +24,20 @@ GitHub action for building OpenFaaS functions
 
 URL of the repository with templates
 
+## Outputs
+
+### `registry`
+
+Function image registry
+
+### `repository`
+
+Function image repository
+
+### `tag`
+
+Function image tag
+
 ## Example usage
 
 ```yaml
@@ -36,4 +50,11 @@ with:
   openfaas-username: ${{ secrets.OPENFAAS_USERNAME }}
   openfaas-password: ${{ secrets.OPENFAAS_PASSWORD }}
   template-url: 'https://github.com/serhiisavruk/openfaas-template'
+
+  ...
+
+  env:
+    ECR_REGISTRY: ${{ steps.build.outputs.registry }}
+    ECR_REPOSITORY: ${{ steps.build.outputs.repository }}
+    IMAGE_TAG: ${{ steps.build.outputs.tag }}
 ```
