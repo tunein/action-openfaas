@@ -10,6 +10,7 @@ set -e
 
 build() {
   echo "🌎building image of OpenFaaS function ..."
+  faas-cli template pull
   faas-cli template pull $2
   BUILDING_MESSAGES_STRING=$(faas-cli build -f $1 | grep 'Image:')
   FULL_IMAGE_ARN=$(echo $BUILDING_MESSAGES_STRING | awk '{print $2}')
